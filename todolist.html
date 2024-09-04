@@ -1,0 +1,89 @@
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <title>Vue Todo List</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="googlebot" content="noindex, nofollow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" type="text/css" href="./css/index.css" />
+</head>
+
+<body>
+  <!-- Main body -->
+  <section id="todoapp">
+
+    <!-- Input box -->
+    <header class="header">
+      <h1>Vue Todo List</h1>
+      <input v-model="inputValue" @keyup.enter="add" autofocus="autofocus" autocomplete="off"
+        placeholder="Please input your todo" class="new-todo" />
+    </header>
+
+    <!-- List -->
+    <section class="main">
+
+      <ul class="todo-list">
+
+        <!-- List items -->
+        <li v-for="(item, index) in todoList" class="todo">
+
+          <div class="view">
+            <span class="index">{{index+1}}</span>
+            <label>{{todoList[index]}}</label>
+            <button @click="remove(index)" class="destroy"></button>
+          </div>
+
+        </li>
+      </ul>
+
+    </section>
+
+    <!-- Sum and clear -->
+    <footer class="footer">
+      <span v-show="todoList.length>0" class="todo-count">
+        <strong>{{todoList.length}}</strong> items left
+      </span>
+      <button @click="clear" v-show="todoList.length>0" class="clear-completed">
+        Clear
+      </button>
+    </footer>
+  </section>
+
+  <!-- Footer  -->
+  <footer class="info">
+    <p>
+      Made by Anca
+      <!-- <a href="http://www.itheima.com/"><img src="./img/black.png" alt="" /></a> -->
+    </p>
+  </footer>
+
+  <!-- Import footer -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <script>
+    var app = new Vue({
+      el: '#todoapp',
+      data: {
+        todoList: ["Hi", "Hello", "How are you"],
+        index: 0,
+        inputValue: ""
+      },
+      methods: {
+        add: function () {
+          this.todoList.push(this.inputValue)
+          this.inputValue = ''
+        },
+        remove: function (index) {
+          this.todoList.splice(index, 1)
+        },
+        clear: function () {
+          this.todoList = []
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
